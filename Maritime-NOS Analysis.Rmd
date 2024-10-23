@@ -53,10 +53,13 @@ max.yr<-2019
 require(plyr)
 
 out.dir<-"output/2019"
-my.files<-list.files(path = out.dir, patter ="*ObservationCount1.csv", full.name=TRUE)
+my.files<-list.files(path = out.dir, pattern ="*ObservationCount1.csv", full.name=TRUE)
 obs<-ldply(my.files, read.csv)
 
-my.files<-list.files(path = out.dir, patter ="*EventData.csv", full.name=TRUE)
+my.files<-lapply(Sys.glob("*ObservationCount1.csv"), read.csv)
+
+
+my.files<-list.files(path = out.dir, pattern ="*EventData.csv", full.name=TRUE)
 event.data<-ldply(my.files, read.csv)
 
 #write out full events for plotting in ArcGIS
